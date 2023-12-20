@@ -5,9 +5,13 @@ from django.contrib.auth.models import User
 class Carro(models.Model):
     marca = models.CharField(max_length=200)
     modelo = models.CharField(max_length=200)
-    ano = models.IntegerField()
+    ano = models.IntegerField('Ano de Fabricação')
     disponivel = models.BooleanField(default=True)
+    preco = models.PositiveSmallIntegerField('Preço') 
+    foto = models.ImageField(upload_to='foto', null=True,blank=True)
 
+    def __str__(self):
+        return self.modelo
 class Cliente(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     telefone = models.CharField(max_length=15)
