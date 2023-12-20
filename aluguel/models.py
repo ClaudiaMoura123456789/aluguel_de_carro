@@ -12,12 +12,9 @@ class Carro(models.Model):
 
     def __str__(self):
         return self.modelo
-class Cliente(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    telefone = models.CharField(max_length=15)
 
 class Aluguel(models.Model):
     carro = models.ForeignKey(Carro, on_delete=models.CASCADE)
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE)
     data_inicial = models.DateField()
     data_final = models.DateField()

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, EmailField, CharField
-from .models import Carro
+from .models import Carro, Aluguel
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -9,6 +9,12 @@ class CarroForm(ModelForm):
     class Meta:
         model=Carro
         fields='__all__'
+
+class AluguelForm(ModelForm):
+   
+    class Meta:
+        model=Aluguel
+        fields='__all__'        
 
 class RegistrationForm(UserCreationForm):
 

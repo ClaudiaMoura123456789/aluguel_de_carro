@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="card mb-3" style="max-width: 1112px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{carro.foto.url}}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ carro.marca }} {{ carro.modelo }}</h5>
+                <p class="card-text">Ano: {{ carro.ano }}</p>
+                <p class="card-text">Status: {{ carro.disponivel }}</p>
+                <p class="card-text">Preço: R${{ carro.preco }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% if perms.aluguel.change_carro %}
+<a class="btn btn-primary" href="{% url 'atualizar-carro' carro.pk %}">Atualizar Carro</a>
+{% endif %}
+{% if perms.aluguel.change_carro %}
+<a class="btn btn-danger" href="{% url 'deletar-carro' carro.pk %}">Apagar Carro</a>
+{% endif %}
+
+{% endblock %}

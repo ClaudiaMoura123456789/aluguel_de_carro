@@ -1,3 +1,28 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Pagina Inicial do Site{% endblock %}
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %}Listagem de Carros{% endblock %}
+{% block content %}
+
+<h2 class="pb-2 border-bottom">Carros</h2>
+
+<div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+    {% for carro in page_obj %}
+    <div class="col">
+        <a class="card" href="{% url 'detalhar-carro' carro.pk %}">
+            <img src="{{carro.foto.url}}" class="card-img" alt="...">
+            <div class="card-img-overlay">
+                <h5 class="card-title">{{carro.marca}} {{carro.modelo}}</h5>
+                <p class="card-text">R${{carro.preco}}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% bootstrap_pagination page_obj %}
+{% if perms.aluguel.add_carro %}
+<a class="btn btn-primary" href="{% url 'cadastrar-carro' %}" role="button">Cadastrar carro</a>
+   {% endif %}
+   {% if perms.aluguel.add_aluguel %}
+<a class="btn btn-primary" href="{% url 'cadastrar-aluguel' %}" role="button">Cadastrar aluguel</a>
+{% endif %}
+{% endblock %}
